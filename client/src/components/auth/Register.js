@@ -13,7 +13,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     password2: ''
   });
 
-  const { name, email, password, password2 } = formData;
+  const { firstname, lastname, phone, email, password, password2 } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,7 +23,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      register({ name, email, password });
+      register({ firstname, lastname, phone, email, password });
     }
   };
 
@@ -33,56 +33,172 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Sign Up</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Create Your Account
-      </p>
-      <form className="form" onSubmit={onSubmit}>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={name}
-            onChange={onChange}
-          />
+      <div class="container">
+        <div class="row main">
+          <div class="panel-heading">
+            <div class="panel-title text-center">
+              <h1 class="title">Sign Up</h1>
+              <hr />
+            </div>
+          </div>
+          <div class="main-login main-center">
+            <form class="form-horizontal" onSubmit={onSubmit}>
+              <div class="form-group">
+                <label for="firstName" class="cols-sm-2 control-label">
+                  First Name
+                </label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user fa" aria-hidden="true"></i>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="firstname"
+                      value={firstname}
+                      onChange={onChange}
+                      placeholder="Enter your first name"
+                      required="required"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lastName" class="cols-sm-2 control-label">
+                  Last Name
+                </label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user fa" aria-hidden="true"></i>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      onChange={onChange}
+                      name="lastname"
+                      value={lastname}
+                      placeholder="Enter your last name"
+                      required="required"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="phone" class="cols-sm-2 control-label">
+                  Phone
+                </label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-phone fa" aria-hidden="true"></i>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="phone"
+                      name="phone"
+                      onChange={onChange}
+                      value={phone}
+                      placeholder="xxx-xxx-xxxx"
+                      required="required"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="cols-sm-2 control-label">
+                  Your Email
+                </label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="email"
+                      onChange={onChange}
+                      value={email}
+                      placeholder="Enter your Email"
+                      required="required"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password" class="cols-sm-2 control-label">
+                  Password
+                </label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                    </span>
+                    <input
+                      type="password"
+                      class="form-control"
+                      onChange={onChange}
+                      value={password}
+                      name="password"
+                      placeholder="Enter your Password"
+                      required="required"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="confirm" class="cols-sm-2 control-label">
+                  Confirm Secret
+                </label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                    </span>
+                    <input
+                      type="password"
+                      class="form-control"
+                      onChange={onChange}
+                      value={password2}
+                      name="password2"
+                      placeholder="Confirm your Secret"
+                      required="required"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-lg btn-block login-button"
+                >
+                  Sign up!
+                </button>
+              </div>
+
+              <hr />
+
+              <div class="form-group ">
+                <Link
+                  class="btn btn-info btn-lg btn-block login-button"
+                  to="/login"
+                >
+                  Cancel
+                </Link>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="email"
-            placeholder="Email Address"
-            name="email"
-            value={email}
-            onChange={onChange}
-          />
-          <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={onChange}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="password2"
-            value={password2}
-            onChange={onChange}
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
-      </form>
-      <p className="my-1">
-        Already have an account? <Link to="/login">Sign In</Link>
-      </p>
+      </div>
     </Fragment>
   );
 };

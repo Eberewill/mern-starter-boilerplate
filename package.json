@@ -22,7 +22,8 @@
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.5",
-    "normalize-url": "^5.0.0"
+    "normalize-url": "^5.0.0",
+    "random-int": "^2.0.1"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
