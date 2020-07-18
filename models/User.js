@@ -24,13 +24,21 @@ const UserSchema = new mongoose.Schema({
   phone: {
     type: Number
   },
+  accountnumber: {
+    type: Number
+  },
   date: {
     type: Date,
     default: Date.now
   },
   recipient: [
     {
-      name: {},
+      name: {
+        type: String
+      },
+      phone: {
+        type: String
+      },
       accountNumber: {
         type: String
       }
