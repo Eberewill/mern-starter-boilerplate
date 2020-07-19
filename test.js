@@ -1,3 +1,5 @@
 const randomInt = require('random-int');
 
-console.log(randomInt(00, 2100909092));
+const gen = randomInt(0, 2100909092);
+
+console.log(gen);

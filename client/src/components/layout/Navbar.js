@@ -85,11 +85,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Appointment <span class="caret"></span>
+                  Loans <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#">Schedule an Appointment</a>
+                    <a href="#">Reaquest for Loan</a>
                   </li>
                 </ul>
               </li>

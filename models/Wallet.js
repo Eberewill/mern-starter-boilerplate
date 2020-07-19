@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
 const User = require('./User');
+const randomInt = require('random-int');
 
-const acountsSchema = new mongoose.Schema({
+const walletSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'User'
   },
-  Ballance: {
+  ballance: {
     type: Number,
     default: 0
   },
-  accountnumber: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'accountnumber'
-  },
+  walletId: {
+    type: Number
+  }
+  /** 
   transactions: [
     {
       transactionname: {
@@ -30,4 +31,12 @@ const acountsSchema = new mongoose.Schema({
       }
     }
   ]
+  walletSchema.methods.generateID = function () {
+  var wallet = this;
+  const walletId = randomInt(0, 2100909092);
+  wallet.walletId = wallet;
+};
+  */
 });
+
+module.exports = mongoose.model('Wallet', walletSchema);

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Wallet = require('./Wallet');
 
 const UserSchema = new mongoose.Schema({
   firstname: {
@@ -24,14 +25,12 @@ const UserSchema = new mongoose.Schema({
   phone: {
     type: Number
   },
-  accountnumber: {
-    type: Number
-  },
+
   date: {
     type: Date,
     default: Date.now
   },
-  recipient: [
+  recipientS: [
     {
       name: {
         type: String
@@ -46,4 +45,4 @@ const UserSchema = new mongoose.Schema({
   ]
 });
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

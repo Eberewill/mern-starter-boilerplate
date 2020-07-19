@@ -7,7 +7,11 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 const normalize = require('normalize-url');
 
+const randomInt = require('random-int');
+
 const User = require('../../models/User');
+const Wallet = require('../../models/Wallet');
+const auth = require('../../middleware/auth');
 
 // @route    POST api/users
 // @desc     Register user
@@ -15,7 +19,7 @@ const User = require('../../models/User');
 router.post(
   '/',
   [
-    check('name', 'Name is required').not().isEmpty(),
+    check('firstname', 'First Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
@@ -61,6 +65,12 @@ router.post(
 
       user.password = await bcrypt.hash(password, salt);
 
+      //wallet create
+      userWallet = new Wallet({
+        owner: user._id,
+        walletId: randomInt(0, 12100909092)
+      });
+      await userWallet.save();
       await user.save();
 
       const payload = {
@@ -68,7 +78,6 @@ router.post(
           id: user.id
         }
       };
-      vvm;
 
       jwt.sign(
         payload,
@@ -80,10 +89,44 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
+      console.error(err);
       res.status(500).send('Server error');
     }
   }
 );
+
+// @route    GET api/user
+// @desc     Get user by token
+// @access   Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const wallet = await Wallet.findOne({
+      owner: req.user.id
+    }).populate('owner', ['firstname', 'lastname']);
+
+    res.json(wallet);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    GET api/user/wallet
+// @desc     Get user by token
+// @access   Private
+router.post('/wallet', auth, async (req, res) => {
+  try {
+    userWallet = new Wallet({
+      owner: req.user.id,
+      walletId: randomInt(0, 12100909092)
+    });
+    await userWallet.save();
+
+    res.json(userWallet);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
