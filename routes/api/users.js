@@ -98,11 +98,11 @@ router.post(
 // @route    GET api/user
 // @desc     Get user by token
 // @access   Private
-router.get('/', auth, async (req, res) => {
+router.get('/me', auth, async (req, res) => {
   try {
     const wallet = await Wallet.findOne({
       owner: req.user.id
-    }).populate('owner', ['firstname', 'lastname']);
+    }).populate('owner', ['firstname', 'lastname', 'email']);
 
     res.json(wallet);
   } catch (err) {
@@ -111,7 +111,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route    GET api/user/wallet
+// @route    GET api/me
 // @desc     Get user by token
 // @access   Private
 router.post('/wallet', auth, async (req, res) => {

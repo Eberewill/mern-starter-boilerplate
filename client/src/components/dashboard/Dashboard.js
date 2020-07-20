@@ -2,8 +2,24 @@ import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getCurrentUser } from '../../actions/user';
+import Spinner from '../layout/Spinner';
 
-const Dashboard = ({ auth: { user } }) => {
+const Dashboard = ({
+  auth,
+  getCurrentUser,
+  user: { loading, currentUser }
+}) => {
+  useEffect(() => {
+    getCurrentUser();
+  }, [getCurrentUser]);
+
+  if (!currentUser && loading)
+    return (
+      <>
+        <Spinner />
+      </>
+    );
   return (
     <Fragment>
       <div class="container main">
@@ -16,13 +32,13 @@ const Dashboard = ({ auth: { user } }) => {
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <i class="fa fa-comments fa-5x"></i>
+                    <i class="fa fa-money fa-5x"></i>
                     <h2>Primary Balance: </h2>
                   </div>
                   <div class="col-xs-6 text-right">
                     <h1>
                       <i class="fa fa-usd" aria-hidden="true"></i>{' '}
-                      <span>3000...</span>
+                      <span>{currentUser.ballance}</span>
                     </h1>
                   </div>
                 </div>
@@ -117,11 +133,12 @@ const Dashboard = ({ auth: { user } }) => {
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  getCurrentUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  user: state.user
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, { getCurrentUser })(Dashboard);

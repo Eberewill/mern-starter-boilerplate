@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
   phone: {
     type: Number
   },
+  wallet: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Wallet'
+  },
 
   date: {
     type: Date,

@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import auth from '../../reducers/auth';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({
+  auth: { isAuthenticated, loading },
+  user: { currentUser },
+  logout
+}) => {
   const nav = (
     <div className="navbar">
       <nav class="navbar navbar-default " role="navigation">
@@ -108,7 +113,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#">Profile</a>
+                    <Link to={`/profile/${currentUser._id}`}> Profile</Link>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
@@ -126,17 +131,23 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   return (
-    <>{!loading && <Fragment>{isAuthenticated ? nav : <> </>}</Fragment>}</>
+    <>
+      {!loading && (
+        <Fragment>{isAuthenticated && currentUser ? nav : <> </>}</Fragment>
+      )}
+    </>
   );
 };
 
 Navbar.propTypes = {
+  auth: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  user: state.user
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);
