@@ -26,9 +26,9 @@ const Navbar = ({
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand page-scroll" href="#">
+            <Link class="navbar-brand page-scroll" to="/dashboard">
               Home
-            </a>
+            </Link>
           </div>
 
           <div class="collapse  navbar-collapse navbar-ex1-collapse">
@@ -45,15 +45,15 @@ const Navbar = ({
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Accounts <span class="caret"></span>
+                  Wallet <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#">Primary</a>
+                    <Link to="/account">View Wallet</Link>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
-                    <a href="#">Savings</a>
+                    <Link to="/deposite">Deposite</Link>
                   </li>
                 </ul>
               </li>
@@ -77,7 +77,7 @@ const Navbar = ({
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
-                    <a href="#">Add/Edit Recipient</a>
+                    <a href="/recipients">Add/Edit Recipient</a>
                   </li>
                 </ul>
               </li>
@@ -113,7 +113,7 @@ const Navbar = ({
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <Link to={`/profile/${currentUser._id}`}> Profile</Link>
+                    <Link to="/profile"> Profile</Link>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>

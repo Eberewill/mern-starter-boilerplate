@@ -38,7 +38,7 @@ const Dashboard = ({
                   <div class="col-xs-6 text-right">
                     <h1>
                       <i class="fa fa-usd" aria-hidden="true"></i>{' '}
-                      <span>{currentUser.ballance}</span>
+                      <span>000</span>
                     </h1>
                   </div>
                 </div>

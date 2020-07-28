@@ -6,7 +6,7 @@ import api from '../utils/api';
 //get currentUser
 export const getCurrentUser = () => async (dispatch) => {
   try {
-    const res = await api.get('/users/me');
+    const res = await api.get('/users/profile');
 
     dispatch({
       type: GET_USER,

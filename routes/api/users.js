@@ -94,11 +94,26 @@ router.post(
     }
   }
 );
+// @route    GET api/user/profile
+// @desc     Get user by token
+// @access   Private
+router.get('/profile', auth, async (req, res) => {
+  try {
+    const profile = await User.findById(req.user.id).select('-password');
+    const wallet = await Wallet.findOne({ owner: req.user.id });
+    const resultObject = { profile, wallet };
+
+    res.json(resultObject);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route    GET api/user
 // @desc     Get user by token
 // @access   Private
-router.get('/me', auth, async (req, res) => {
+/**router.get('/me', auth, async (req, res) => {
   try {
     const wallet = await Wallet.findOne({
       owner: req.user.id
@@ -109,24 +124,6 @@ router.get('/me', auth, async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-});
-
-// @route    GET api/me
-// @desc     Get user by token
-// @access   Private
-router.post('/wallet', auth, async (req, res) => {
-  try {
-    userWallet = new Wallet({
-      owner: req.user.id,
-      walletId: randomInt(0, 12100909092)
-    });
-    await userWallet.save();
-
-    res.json(userWallet);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server Error');
-  }
-});
+}); */
 
 module.exports = router;
