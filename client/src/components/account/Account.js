@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Spinner from '../layout/Spinner';
 
-const Account = () => {
+const Account = ({ wallet, transactions }) => {
   return (
     <div class="container main">
       <div class="row">
@@ -67,4 +70,11 @@ const Account = () => {
   );
 };
 
-export default Account;
+Account.propTypes = {
+  wallet: PropTypes.object.isRequired,
+  transactions: PropTypes.array.isRequired
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+export default connect(mapStateToProps, {})(Account);
