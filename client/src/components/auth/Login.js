@@ -72,17 +72,6 @@ const Login = ({ login, isAuthenticated }) => {
             </form>
 
             <hr />
-
-            <div class="form-group ">
-              <Link
-                type="submit"
-                class="btn btn-info btn-lg btn-block login-button"
-                to="/register"
-              >
-                {' '}
-                Sign up!
-              </Link>
-            </div>
           </div>
         </div>
       </div>

@@ -90,11 +90,11 @@ const Navbar = ({
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Loans <span class="caret"></span>
+                  Widrawals <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#">Reaquest for Loan</a>
+                    <a href="#">Widrawals requests</a>
                   </li>
                 </ul>
               </li>
