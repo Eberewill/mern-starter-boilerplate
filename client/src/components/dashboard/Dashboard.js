@@ -3,18 +3,22 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentUser } from '../../actions/user';
+
+import { getCustomers } from '../../actions/customers';
 import Spinner from '../layout/Spinner';
 
 const Dashboard = ({
   auth,
   getCurrentUser,
+  getCustomers,
+  customers,
   user: { loading, currentUser }
 }) => {
   useEffect(() => {
-    getCurrentUser();
-  }, [getCurrentUser]);
+    getCustomers();
+  }, [getCustomers]);
 
-  if (!currentUser && loading)
+  if (!customers && loading)
     return (
       <>
         <Spinner />
@@ -33,12 +37,11 @@ const Dashboard = ({
                 <div class="row">
                   <div class="col-xs-6">
                     <i class="fa fa-money fa-5x"></i>
-                    <h2>Primary Balance: </h2>
+                    <h2>Total Balance: </h2>
                   </div>
                   <div class="col-xs-6 text-right">
                     <h1>
-                      <i class="fa fa-usd" aria-hidden="true"></i>{' '}
-                      <span>000</span>
+                      <i class="fa " aria-hidden="true"></i>₦ <span>000</span>
                     </h1>
                   </div>
                 </div>
@@ -57,12 +60,12 @@ const Dashboard = ({
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <h2>Savings Balance: </h2>
+                    <h2>Loaded Vauchers Balance: </h2>
                   </div>
                   <div class="col-xs-6 text-right">
                     <h1>
-                      <i class="fa fa-usd" aria-hidden="true"></i>{' '}
-                      <span> 30000...</span>
+                      <i class="fa" aria-hidden="true"></i>{' '}
+                      <span> ₦ 30000...</span>
                     </h1>
                   </div>
                 </div>
@@ -78,7 +81,29 @@ const Dashboard = ({
               </a>
             </div>
           </div>
-
+          <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-3">
+                    <i class="fa fa-credit-card fa-5x"></i>
+                  </div>
+                  <div class="col-xs-9 text-right">
+                    <div>Deposit</div>
+                  </div>
+                </div>
+              </div>
+              <a href="#">
+                <div class="panel-footer">
+                  <span class="pull-left">Go to Deposit</span>
+                  <span class="pull-right">
+                    <i class="fa fa-arrow-circle-right"></i>
+                  </span>
+                  <div class="clearfix"></div>
+                </div>
+              </a>
+            </div>
+          </div>
           <div class="col-lg-3 col-md-6">
             <div class="panel panel-yellow">
               <div class="panel-heading">
@@ -125,6 +150,29 @@ const Dashboard = ({
               </a>
             </div>
           </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-3">
+                    <i class="fa fa-money fa-5x"></i>
+                  </div>
+                  <div class="col-xs-9 text-right">
+                    <div> Total Customers</div>
+                  </div>
+                </div>
+              </div>
+              <a href="#">
+                <div class="panel-footer">
+                  <span class="pull-left">Go to Withdrawal</span>
+                  <span class="pull-right">
+                    <i class="fa fa-arrow-circle-right"></i>
+                  </span>
+                  <div class="clearfix"></div>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </Fragment>
@@ -133,12 +181,17 @@ const Dashboard = ({
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
-  getCurrentUser: PropTypes.func.isRequired
+  getCurrentUser: PropTypes.func.isRequired,
+  getCustomers: PropTypes.func.isRequired,
+  customers: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  user: state.user
+  user: state.user,
+  customers: state.customers
 });
 
-export default connect(mapStateToProps, { getCurrentUser })(Dashboard);
+export default connect(mapStateToProps, { getCurrentUser, getCustomers })(
+  Dashboard
+);

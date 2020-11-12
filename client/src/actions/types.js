@@ -9,3 +9,5 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const GET_USER = 'GET_USER';
 export const USER_ERROR = 'USER_ERROR';
+
+export const GET_CUSTOMERS = 'GET_CUSTOMERS';
