@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Customer = require('./models/Customer');
 const Vaucher = require('./models/Vaucher');
-const Test = require('./models/TestModel');
 const Wallets = require('./models/Wallets');
 
 const Recharges = require('./models/Recharges');

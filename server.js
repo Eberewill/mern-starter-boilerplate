@@ -498,8 +498,8 @@ app.post('/ussd', function (req, res) {
 // Define Routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/vaucher', require('./routes/api/vaucher'));
-app.use('/api/test', require('./routes/api/test'));
+//app.use('/api/vaucher', require('./routes/api/vaucher'));
+//app.use('/api/test', require('./routes/api/test'));
 
 //app.use('/api/auth', require('./routes/api/auth'));
 

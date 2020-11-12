@@ -66,11 +66,11 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
 
       //wallet create
-      userWallet = new Wallet({
-        owner: user._id,
-        walletId: randomInt(0, 12100909092)
-      });
-      await userWallet.save();
+      // userWallet = new Wallet({
+      // owner: user._id,
+      //  walletId: randomInt(0, 12100909092)
+      // });
+      //  await userWallet.save();
       await user.save();
 
       const payload = {
